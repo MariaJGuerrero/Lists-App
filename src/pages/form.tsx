@@ -1,19 +1,55 @@
+import { FormEvent } from "react";
+import { useState } from "react";
+import List from "./list";
+
 const Form = () => {
+    const [lastListName, setLastListName] = useState('');
+
+    let lists: string[] = []
+    const submitHandler = (e: FormEvent) => {
+        e.preventDefault();
+        const target = e.target as HTMLFormElement
+        const data = new FormData(target);
+        const listName = data.get('listName') as string
+        lists = [...lists, listName]
+        const itemInputValue = data.get('itemList')
+        console.log(lists[lists.length - 1])
+    }
+    
+    
+
+    
     return(
         <div>
-            <form action="">
-                <label htmlFor="">
+            <form onSubmit= {(e) => {
+                submitHandler(e)
+                setLastListName(lists[lists.length - 1])
+                }
+            }>
+                <label>
                     List name
-                    <input type="text" />
+                    <input type="text" name="listName" />
                 </label>
-                <label htmlFor="">
+                <label>
                     Item list
-                    <input type="text" />
+                    <input type="text" name="itemList" />
                 </label>
+                <button type="submit">Save</button>
             </form>
-            <button>Save</button>
+            {lists ? 
+                <button onClick={() =>
+                    <List 
+                        allLists= {lists}
+                    />}
+                >
+                    {lastListName}
+                </button> 
+            : 
+                undefined
+            }
         </div>
     )
 }
+
 
 export default Form;

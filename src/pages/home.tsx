@@ -14,7 +14,7 @@ const Home = () => {
                 <button /*onClick={ () => .<Form /> }*/>create new list</button>
                 <button>lists menu</button>
             </section>
-
+            <Form />
         </div>
     )
 }
