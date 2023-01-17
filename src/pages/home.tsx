@@ -1,20 +1,23 @@
-import Form from './form';
+import { Link } from 'react-router-dom'
 
 const Home = () => {
     return(
         <div>
             <header>
-                <h2>list App</h2>
+                <h2>LISTS APP</h2>
             </header>
             <section>
                 <div>
                     <p>how to use?</p>
                     <p>functional app description..... </p>
                 </div>
-                <button /*onClick={ () => .<Form /> }*/>create new list</button>
-                <button>lists menu</button>
+                <Link to='/form'>
+                <button>create new list</button>
+                </Link>
+                <Link to='/list'>
+                    <button>lists menu</button>
+                </Link>
             </section>
-            <Form />
         </div>
     )
 }

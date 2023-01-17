@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import List from "./list";
 
 const Form = () => {
@@ -37,11 +38,7 @@ const Form = () => {
                 <button type="submit">Save</button>
             </form>
             {lists ? 
-                <button onClick={() =>
-                    <List 
-                        allLists= {lists}
-                    />}
-                >
+                <button>
                     {lastListName}
                 </button> 
             : 
