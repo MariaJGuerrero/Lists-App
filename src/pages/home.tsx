@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FormEvent } from "react";
-import { useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import contextLists from '../utils/context';
 
 const Home = () => {
@@ -13,10 +12,11 @@ const Home = () => {
         const data = new FormData(target);
         const listName = data.get('listName') as string
         lists = [...lists, listName]
-        const itemInputValue = data.get('itemList')
         console.log(lists[lists.length - 1])
     }
 
+   const listsEx = useContext(contextLists)
+console.log(listsEx)
     return(
         <div>
             <header>
@@ -28,6 +28,7 @@ const Home = () => {
                     <p>functional app description..... </p>
                 </div>
                 <div className="form-container">
+                    <h2>Create new list</h2>
                     <form onSubmit= {(e) => {
                         submitHandler(e)
                         setLastListName(lists[lists.length - 1])
@@ -47,7 +48,7 @@ const Home = () => {
                         undefined
                     }
                 </div>
-                <Link to='/list'>
+                <Link to='/listsMenu'>
                     <button>lists menu</button>
                 </Link>
             </section>

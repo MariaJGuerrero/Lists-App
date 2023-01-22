@@ -1,6 +1,4 @@
 
-
-
 const List = () => {
     return(
         <div>
@@ -11,3 +9,5 @@ const List = () => {
 }
 
 export default List;
+
+
