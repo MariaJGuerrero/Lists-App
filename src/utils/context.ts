@@ -1,8 +1,7 @@
 import React from "react";
 
 interface ContextLists {
-    allMyLists: List[], 
-    updateAllMyLists: (newList: List[]) => void
+    allMyLists: List[]
 } 
 interface List {
     name: string,
@@ -10,8 +9,7 @@ interface List {
 }
 
 const contextValue: ContextLists = {
-    allMyLists: [],
-    updateAllMyLists: () => {}
+    allMyLists: []
 }
 const contextLists = React.createContext(contextValue);
 
