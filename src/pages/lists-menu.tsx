@@ -2,13 +2,12 @@ import { useContext } from 'react';
 import contextLists from '../utils/context';
 
 const ListsMenu = () => {
-    const allMyLists = useContext(contextLists)
-
+    const context = useContext(contextLists)
 
     return(
         <div>
-            <h1>All my lists</h1>
-            <p></p>
+            <h1>{context.allMyLists.map((list)=> <p>{list.name}</p>)}</h1>
+            <p>pa parobar</p>
         </div>
     )
 }

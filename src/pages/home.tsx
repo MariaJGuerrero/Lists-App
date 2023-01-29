@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { FormEvent, useContext, useState } from "react";
 import contextLists from '../utils/context';
+import { postList } from '../services/lists';
 
 const Home = () => {
     const [lastListName, setLastListName] = useState('');
 
-    const context = useContext(contextLists)
+    
 
 
     let lists: string[] = []
@@ -15,7 +16,7 @@ const Home = () => {
         const data = new FormData(target);
         const listName = data.get('listName') as string
         lists = [...lists, listName]
-        console.log(lists[lists.length - 1])
+        postList(listName).then((r)=>{console.log('respuesta POST', r)})
     }
 
     return(
@@ -52,7 +53,6 @@ const Home = () => {
                 <Link to='/listsMenu'>
                     <button>lists menu</button>
                 </Link>
-                <div>{context.allMyLists.map((list)=> <p>{list.name}</p>)}</div>
             </section>
         </div>
     )
