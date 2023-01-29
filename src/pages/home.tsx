@@ -5,6 +5,9 @@ import contextLists from '../utils/context';
 const Home = () => {
     const [lastListName, setLastListName] = useState('');
 
+    const context = useContext(contextLists)
+
+
     let lists: string[] = []
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
@@ -15,8 +18,6 @@ const Home = () => {
         console.log(lists[lists.length - 1])
     }
 
-   const listsEx = useContext(contextLists)
-console.log(listsEx)
     return(
         <div>
             <header>
@@ -51,6 +52,7 @@ console.log(listsEx)
                 <Link to='/listsMenu'>
                     <button>lists menu</button>
                 </Link>
+                <div>{context.allMyLists.map((list)=> <p>{list.name}</p>)}</div>
             </section>
         </div>
     )

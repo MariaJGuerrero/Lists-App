@@ -4,19 +4,21 @@ import './App.css';
 import Home from './pages/home';
 import List from './pages/list';
 import ListsMenu from './pages/list';
-import { getLists } from "./services/lists";
+import { getLists, postList } from "./services/lists";
 import contextLists from "./utils/context";
 
 function App() {
 
-  const [allMyLists, setAllMyLists] = useState([])
+  const [allTheLists, setAllTheLists] = useState([])
   useEffect(()=> {
-    getLists().then((r)=> {setAllMyLists(r)})
+    getLists().then((r)=> {setAllTheLists(r)})
   }, [])
+
+  //postList().then((r)=>{console.log('respuesta POST', r)})
 
   return (
     <div className="App">
-      <contextLists.Provider value= {{ allMyLists: allMyLists}}>
+      <contextLists.Provider value= {{ allMyLists: allTheLists}}>
         <Router>
           <Routes>
             <Route path='/' element= {<Home />} />
