@@ -6,17 +6,18 @@ import { postList } from '../services/lists';
 const Home = () => {
     const [lastListName, setLastListName] = useState('');
 
-    
+    const context = useContext(contextLists)
 
 
-    let lists: string[] = []
+    let listsNames: string[] = []
     const submitHandler = (e: FormEvent) => {
         e.preventDefault();
         const target = e.target as HTMLFormElement
         const data = new FormData(target);
         const listName = data.get('listName') as string
-        lists = [...lists, listName]
-        postList(listName).then((r)=>{console.log('respuesta POST', r)})
+        const item = data.get('item') as string
+        listsNames = [...listsNames, listName]
+        postList(listName, item).then((newList)=>{context.updateLists(newList)})
     }
 
     return(
@@ -33,16 +34,20 @@ const Home = () => {
                     <h2>Create new list</h2>
                     <form onSubmit= {(e) => {
                         submitHandler(e)
-                        setLastListName(lists[lists.length - 1])
+                        setLastListName(listsNames[listsNames.length - 1])
                         }
                     }>
                         <label>
                             List name
                             <input type="text" name="listName" />
                         </label>
+                        <label>
+                            New item list
+                            <input type="text" name="item" />
+                        </label>
                         <button type="submit">Save</button>
                     </form>
-                    {lists ? 
+                    {listsNames ? 
                         <button>
                             {lastListName}
                         </button> 

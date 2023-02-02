@@ -5,14 +5,14 @@ export const getLists = async () => {
     return body
 }
 
-export const postList = async (listname: string) => {
+export const postList = async (listname: string, items: string ) => {
     const response = await fetch(
         'http://localhost:3001/lists',
         {
             method: 'POST',
             body: JSON.stringify({
                 name: listname,
-                items: ['item uno', 'item dos']
+                items: items
             }),
             headers: {
                 'Content-Type': 'application/json'

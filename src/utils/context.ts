@@ -1,16 +1,18 @@
 import React from "react";
-import List from "../pages/list";
+import { List, UpdateListsFunction } from "../models/list";
+
 
 interface ContextLists {
     allMyLists: List[]
+    updateLists: UpdateListsFunction
 } 
-interface List {
-    name: string,
-    items: string[]
-}
+
+
 
 const contextValue: ContextLists = {
-    allMyLists: []
+    allMyLists: [],
+    updateLists:  (newList: List) => {}
+    
 }
 
 
