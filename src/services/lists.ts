@@ -5,7 +5,7 @@ export const getLists = async () => {
     return body
 }
 
-export const postList = async (listname: string, items: string ) => {
+export const postList = async (listname: string, items: string[] ) => {
     const response = await fetch(
         'http://localhost:3001/lists',
         {

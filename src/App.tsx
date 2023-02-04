@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import { List, UpdateListsFunction } from "./models/list";
 import Home from './pages/home';
+import SingleListView from "./pages/single-list-view";
 import ListsMenu from './pages/lists-menu';
 import { getLists } from "./services/lists";
 import contextLists from "./utils/context";
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path='/' element= {<Home />} />
             <Route path='/listsMenu' element= {<ListsMenu />} />
+            <Route path='/SingleListView/:id' element= {<SingleListView />} />
           </Routes>
         </Router>
       </contextLists.Provider>

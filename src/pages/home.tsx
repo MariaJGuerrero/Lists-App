@@ -17,7 +17,7 @@ const Home = () => {
         const listName = data.get('listName') as string
         const item = data.get('item') as string
         listsNames = [...listsNames, listName]
-        postList(listName, item).then((newList)=>{context.updateLists(newList)})
+        postList(listName, [item]).then((newList)=>{context.updateLists(newList)})
     }
 
     return(
