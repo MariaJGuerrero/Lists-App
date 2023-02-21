@@ -4,9 +4,8 @@ import './App.css';
 import { List, UpdateListsFunction } from "./models/list";
 import Home from './pages/home';
 import SingleListView from "./pages/single-list-view";
-import ListsMenu from './pages/lists-menu';
 import { getLists } from "./services/lists";
-import contextLists from "./utils/context";
+
 
 function App() {
 
@@ -15,22 +14,20 @@ function App() {
     getLists().then((r)=> {setAllTheLists(r)})
   }, [])
 
-  const updateLists:UpdateListsFunction = (newList: List) => {
-    const updatedLists = [...allTheLists, newList]
-    setAllTheLists(updatedLists)
-  }
+  /*const addList:UpdateListsFunction = (newList: List) => {
+    const listAdded = [...allTheLists, newList]
+    setAllTheLists(listAdded)
+  }*/
 
   return (
     <div className="App">
-      <contextLists.Provider value= {{ allMyLists: allTheLists, updateLists }}>
         <Router>
           <Routes>
-            <Route path='/' element= {<Home />} />
-            <Route path='/listsMenu' element= {<ListsMenu />} />
+            <Route path='/' element= {<Home lists={allTheLists}/>} />
             <Route path='/SingleListView/:id' element= {<SingleListView />} />
+            <Route path='/SingleListView' element= {<SingleListView />} />
           </Routes>
         </Router>
-      </contextLists.Provider>
     </div>
   );
 }
