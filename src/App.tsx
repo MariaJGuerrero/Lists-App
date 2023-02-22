@@ -24,8 +24,8 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element= {<Home lists={allTheLists}/>} />
-            <Route path='/SingleListView/:id' element= {<SingleListView />} />
-            <Route path='/SingleListView' element= {<SingleListView />} />
+            <Route path='/SingleListView/:id' element= {<SingleListView lists={allTheLists}/>} />
+            <Route path='/SingleListView' element= {<SingleListView lists={allTheLists} />} />
           </Routes>
         </Router>
     </div>
