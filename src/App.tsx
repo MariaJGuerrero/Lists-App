@@ -14,18 +14,18 @@ function App() {
     getLists().then((r)=> {setAllTheLists(r)})
   }, [])
 
-  /*const addList:UpdateListsFunction = (newList: List) => {
+  const addList:UpdateListsFunction = (newList: List) => {
     const listAdded = [...allTheLists, newList]
     setAllTheLists(listAdded)
-  }*/
+  }
 
   return (
     <div className="App">
         <Router>
           <Routes>
             <Route path='/' element= {<Home lists={allTheLists}/>} />
-            <Route path='/SingleListView/:id' element= {<SingleListView lists={allTheLists}/>} />
-            <Route path='/SingleListView' element= {<SingleListView lists={allTheLists} />} />
+            <Route path='/SingleListView/:id' element= {<SingleListView lists={allTheLists} addListFunction={addList} />} />
+            <Route path='/SingleListView' element= {<SingleListView lists={allTheLists} addListFunction={addList} />} />
           </Routes>
         </Router>
     </div>

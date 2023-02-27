@@ -1,60 +1,40 @@
 import { Link } from 'react-router-dom'
 import { FormEvent } from "react";
-import { postList } from '../services/lists';
 import { List } from "../models/list";
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 
 
 const Home = ( { lists }: {lists: List[]}) => {
 
-  
-    let listsNames: string[] = []
-    const submitHandler = (e: FormEvent) => {
-        e.preventDefault();
-        const target = e.target as HTMLFormElement
-        const data = new FormData(target);
-        const listName = data.get('listName') as string
-        const item = data.get('item') as string
-        listsNames = [...listsNames, listName]
-        let listItems: string[] = []
-        listItems = [...listItems, item]
-        //postList(listName, listItems).then((newList)=>{context.addList(newList)})
-    }
-
     return(
         <div>
             <header>
-                <h2>LISTS APP</h2>
+            <Typography variant="h2" gutterBottom>
+                MY LISTS
+            </Typography>
             </header>
             <section>
                 <div>
                     {lists.map((list)=>
-                         <Link to={`/singleListView/${list._id}`}>
-                            <h2>{list.name}</h2>
+                         <Link to={`/singleListView/${list._id}`} style={{ textDecoration: 'none' }}>
+                            <Typography variant="body1" gutterBottom>
+                                {list.name}
+                            </Typography>
                         </Link>
                     )}
                 </div>
                
                 <div className="form-container">
                 <Link to={`/singleListView`}>
-                   <button>
-                    CREATE NEW LIST
-                   </button>
+                    <Button variant="contained" size= 'large'>Create New List</Button>
                 </Link>
-                    <form className='form' onSubmit= {(e) => {
-                        submitHandler(e)
-                        }
-                    }>
-                        <label>
-                            List name
-                            <input type="text" name="listName" />
-                        </label>
-                        <label>
-                            New item list
-                            <input type="text" name="item" />
-                        </label>
-                        <button type="submit">Save</button>
-                    </form>
                 </div>
             </section>
         </div>
