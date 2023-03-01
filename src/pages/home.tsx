@@ -16,7 +16,7 @@ const Home = ( { lists }: {lists: List[]}) => {
     return(
         <div>
             <header>
-            <Typography variant="h2" gutterBottom>
+            <Typography variant="h1" gutterBottom>
                 MY LISTS
             </Typography>
             </header>
@@ -33,7 +33,7 @@ const Home = ( { lists }: {lists: List[]}) => {
                
                 <div className="form-container">
                 <Link to={`/singleListView`}>
-                    <Button variant="contained" size= 'large'>Create New List</Button>
+                    <Button variant="contained" size= 'large' style={{ textDecoration: 'none' }}>Create New List</Button>
                 </Link>
                 </div>
             </section>

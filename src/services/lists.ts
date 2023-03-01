@@ -42,3 +42,21 @@ export const putList = async (listname: string | undefined, items: string[] | un
     const content = await response.json();
     return content;
 }
+
+
+export const deleteList = async (idList: string | undefined ) => {
+    const response = await fetch(
+        'http://localhost:3001/lists',
+        {
+            method: 'DELETE',
+            body: JSON.stringify({
+                _id: idList
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }
+    )
+    const content = await response.json();
+    return content;
+}

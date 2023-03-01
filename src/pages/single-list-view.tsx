@@ -1,15 +1,19 @@
-import { useContext, FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { useParams } from "react-router-dom";
-import { putList, postList } from '../services/lists';
+import { putList, postList, deleteList } from '../services/lists';
 import { List, UpdateListsFunction } from "../models/list";
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 
-const SingleListView = ({ lists, addListFunction}: {lists: List[], addListFunction: UpdateListsFunction}) => {
+const SingleListView = ({ lists, addListFunction, removeListFunction}: {lists: List[], addListFunction: UpdateListsFunction, removeListFunction: Function}) => {
     const { id } = useParams();
     const oneList = lists.find((list)=>list._id === id)
-    console.log('lista seleccionada', oneList)
-
-    
 
 
     const postHandler = (e: FormEvent) => {
@@ -39,23 +43,36 @@ const SingleListView = ({ lists, addListFunction}: {lists: List[], addListFuncti
         
     }
 
+    const deleteAList = () => {
+        deleteList(oneList?._id).then(()=>{removeListFunction(oneList?._id)})
+    }
+
     return(
         <div>
             
             {id 
             ? 
                 (<>
-                    <h2>{oneList?.name}</h2>
+                    <Typography variant="h2" gutterBottom>
+                        {oneList?.name}
+                    </Typography>
+                    <button onClick={()=>deleteAList()}>delete</button>
                     {oneList?.items.map((item)=> 
-                        <p>{item}</p> 
+                        <Typography variant="body1" gutterBottom>
+                            {item}
+                        </Typography>
                     )}
                     <form onSubmit={(e) => {
                             putHandler(e)}}>
-                        <label>
-                            New item list
-                            <input type="text" name="item" />
-                        </label>
-                        <button  type="submit">Save</button>
+                        <TextField
+                            required
+                            id="outlined-required"
+                            label="New Item List"
+                            name="item"
+                        />
+                        <Button type="submit" variant="contained" size= 'small' style={{ textDecoration: 'none' }}>
+                            Save
+                        </Button>
                     </form>
                 </>)
                
@@ -64,18 +81,25 @@ const SingleListView = ({ lists, addListFunction}: {lists: List[], addListFuncti
                         
                         <form onSubmit={(e) => {
                             postHandler(e)}}>
-                            <label>
-                                New list name
-                                <input type="text" name="name" />
-                            </label>
-                            <label>
-                                New item list
-                                <input type="text" name="item" />
-                            </label>
-                            <button type="submit"onClick={()=>
+                             <TextField
+                                required
+                                id="outlined-required"
+                                label="New List"
+                                name="name"
+                            />   
+                            <TextField
+                                required
+                                id="outlined-required"
+                                label="New Item List"
+                                name="item"
+                            />
+                            <Button type="submit" variant="contained" size= 'small' style={{ textDecoration: 'none' }}>
+                                Save
+                            </Button>
+                            {/*<button type="submit"onClick={()=>
                                  <h2>{lists[lists.length - 1].name}</h2>}    
                             >Save
-                            </button>
+                            </button>*/}
                         </form>
                     </>)
             }

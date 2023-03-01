@@ -19,13 +19,37 @@ function App() {
     setAllTheLists(listAdded)
   }
 
+  const removeList = (listId: string) => {
+    const allTheListsUpdate = allTheLists.filter((list)=> list._id === listId)
+    setAllTheLists(allTheListsUpdate)
+    console.log('listado actualizado despues delete', allTheLists)
+  }
+
   return (
     <div className="App">
         <Router>
           <Routes>
             <Route path='/' element= {<Home lists={allTheLists}/>} />
-            <Route path='/SingleListView/:id' element= {<SingleListView lists={allTheLists} addListFunction={addList} />} />
-            <Route path='/SingleListView' element= {<SingleListView lists={allTheLists} addListFunction={addList} />} />
+            <Route 
+              path='/SingleListView/:id' 
+              element= {
+                <SingleListView 
+                  lists={allTheLists} 
+                  addListFunction={addList} 
+                  removeListFunction={removeList} 
+                />
+              } 
+            />
+            <Route 
+              path='/SingleListView' 
+              element= {
+                <SingleListView 
+                  lists={allTheLists} 
+                  addListFunction={addList} 
+                  removeListFunction={removeList} 
+                />
+              } 
+            />
           </Routes>
         </Router>
     </div>
