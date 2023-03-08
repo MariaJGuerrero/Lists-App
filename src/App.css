@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-logo {
+/*.App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -24,7 +24,7 @@
   color: white;
 }
 
-.App-link {
+App-link {
   color: #61dafb;
 }
 
@@ -35,4 +35,72 @@
   to {
     transform: rotate(360deg);
   }
+}*/
+
+.home-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #9E7676;
 }
+
+.title{
+  color: #FFF8EA;
+}
+
+.lists-names{
+  color: #594545;
+}
+
+.lists-names-container{
+  margin: 10% 10%;
+}
+
+button.css-11qr2p8-MuiButtonBase-root-MuiButton-root{
+  color: #FFF8EA;
+  background-color: #815B5B;
+}
+
+button.css-jh47zj-MuiButtonBase-root-MuiButton-root{
+  color: #FFF8EA;
+  background-color: #815B5B;
+}
+
+.button{
+  color: #FFF8EA;
+  background-color: #815B5B;
+}
+
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
+  margin: 10% 10%;
+}
+
+.input{
+  
+}
+
+.single-list-name{
+  color: #594545;
+}
+
+.items{
+  color: #9E7676;
+}
+
+li{
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+
+

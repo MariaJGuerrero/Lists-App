@@ -24,7 +24,7 @@ export const postList = async (listname: string, items: string[] ) => {
 
 
 
-export const putList = async (listname: string | undefined, items: string[] | undefined, idList: string | undefined ) => {
+export const putList = async (listname?: string , items?: string[], idList?: string ) => {
     const response = await fetch(
         'http://localhost:3001/lists',
         {
@@ -32,7 +32,7 @@ export const putList = async (listname: string | undefined, items: string[] | un
             body: JSON.stringify({
                 name: listname,
                 items,
-                _id: idList
+                id: idList
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export const deleteList = async (idList: string | undefined ) => {
         {
             method: 'DELETE',
             body: JSON.stringify({
-                _id: idList
+                id: idList
             }),
             headers: {
                 'Content-Type': 'application/json'

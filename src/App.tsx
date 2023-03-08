@@ -17,6 +17,20 @@ function App() {
   const addList:UpdateListsFunction = (newList: List) => {
     const listAdded = [...allTheLists, newList]
     setAllTheLists(listAdded)
+    console.log('lista añadida a allthelists', listAdded)
+  }
+
+  const modifyList: UpdateListsFunction = (newList: List) => {
+    console.log('antes', newList)
+    const latsItem = newList.items[newList.items.length-1]
+    const thisList = allTheLists.find((list)=>list._id === newList._id)
+    thisList?.items.push(latsItem)
+    console.log('despues', thisList)
+
+    const newAllTheLists = allTheLists.map((list)=> list._id === newList._id 
+      ? newList 
+      : list
+    )
   }
 
   const removeList = (listId: string) => {
@@ -36,7 +50,8 @@ function App() {
                 <SingleListView 
                   lists={allTheLists} 
                   addListFunction={addList} 
-                  removeListFunction={removeList} 
+                  removeListFunction={removeList}
+                  modifyListFunction={modifyList} 
                 />
               } 
             />
@@ -47,6 +62,7 @@ function App() {
                   lists={allTheLists} 
                   addListFunction={addList} 
                   removeListFunction={removeList} 
+                  modifyListFunction={modifyList}
                 />
               } 
             />

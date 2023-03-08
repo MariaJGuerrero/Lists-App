@@ -15,27 +15,24 @@ const Home = ( { lists }: {lists: List[]}) => {
 
     return(
         <div>
-            <header>
-            <Typography variant="h1" gutterBottom>
+            <header className='home-header'>
+            <Typography className= 'title' variant="h1" gutterBottom>
                 MY LISTS
             </Typography>
             </header>
             <section>
-                <div>
+                <div className='lists-names-container'>
                     {lists.map((list)=>
                          <Link to={`/singleListView/${list._id}`} style={{ textDecoration: 'none' }}>
-                            <Typography variant="body1" gutterBottom>
+                            <Typography className='lists-names' variant="body1" gutterBottom>
                                 {list.name}
                             </Typography>
                         </Link>
                     )}
                 </div>
-               
-                <div className="form-container">
                 <Link to={`/singleListView`}>
-                    <Button variant="contained" size= 'large' style={{ textDecoration: 'none' }}>Create New List</Button>
+                    <Button  variant="contained" size= 'large' >Create New List</Button>
                 </Link>
-                </div>
             </section>
         </div>
     )

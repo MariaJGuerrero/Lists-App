@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import { putList, postList, deleteList } from '../services/lists';
 import { List, UpdateListsFunction } from "../models/list";
@@ -9,11 +9,19 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 
 
-const SingleListView = ({ lists, addListFunction, removeListFunction}: {lists: List[], addListFunction: UpdateListsFunction, removeListFunction: Function}) => {
+
+const SingleListView = ({ lists, addListFunction, removeListFunction, modifyListFunction }: {lists: List[], addListFunction: UpdateListsFunction, removeListFunction: Function, modifyListFunction: UpdateListsFunction}) => {
     const { id } = useParams();
     const oneList = lists.find((list)=>list._id === id)
+    const [itemList, setItemList] = useState<string[]>(oneList?.items ?? [])
+
+    if(oneList === undefined){
+        return <p>error</p>
+    }
+
 
 
     const postHandler = (e: FormEvent) => {
@@ -22,6 +30,7 @@ const SingleListView = ({ lists, addListFunction, removeListFunction}: {lists: L
         const data = new FormData(target);
         const listName = data.get('name') as string
         const item = data.get('item') as string
+        setItemList([item])
         postList(listName, [item] ).then((newList)=>{
             addListFunction(newList)
             
@@ -35,42 +44,57 @@ const SingleListView = ({ lists, addListFunction, removeListFunction}: {lists: L
         e.preventDefault();
         const target = e.target as HTMLFormElement
         const data = new FormData(target);
-        const listName = data.get('name') as string
+        const listName = oneList.name
         const item = data.get('item') as string
-        const itemList: string[] = []
         const newItemList = [...itemList, item]
-        putList(listName, newItemList, oneList?._id).then((newList)=>{addListFunction(newList)})
+        putList(listName, newItemList, oneList._id).then((newList)=>{
+            modifyListFunction(newList)
+            setItemList(newItemList)
+            console.log('items', newList.items)
+        })
         
+        console.log(itemList)
     }
 
-    const deleteAList = () => {
-        deleteList(oneList?._id).then(()=>{removeListFunction(oneList?._id)})
+    const deleteAList = (listId: string| undefined) => {
+        deleteList(listId).then((Id)=>
+            {
+                removeListFunction(Id)
+            })
     }
 
     return(
-        <div>
+        <div className="single-view-container">
             
             {id 
             ? 
                 (<>
-                    <Typography variant="h2" gutterBottom>
+                    <Typography className="single-list-name" variant="h2" gutterBottom>
                         {oneList?.name}
                     </Typography>
-                    <button onClick={()=>deleteAList()}>delete</button>
-                    {oneList?.items.map((item)=> 
-                        <Typography variant="body1" gutterBottom>
-                            {item}
-                        </Typography>
-                    )}
-                    <form onSubmit={(e) => {
+                    <button className= "button" onClick={()=>deleteAList(oneList?._id)}>
+                        delete the list
+                    </button>
+                    <ul>
+                        {itemList.map((item)=> 
+                        <li>
+                            <Typography className="items" variant="body1" gutterBottom>
+                                {item}
+                            </Typography>
+                             <DeleteTwoToneIcon />
+                        </li>
+                        )}
+                    </ul>
+                    
+                    <form className="form" onSubmit={(e) => {
                             putHandler(e)}}>
-                        <TextField
+                        <TextField 
                             required
                             id="outlined-required"
                             label="New Item List"
                             name="item"
                         />
-                        <Button type="submit" variant="contained" size= 'small' style={{ textDecoration: 'none' }}>
+                        <Button  type="submit" variant="contained" size= 'small'>
                             Save
                         </Button>
                     </form>
@@ -79,15 +103,15 @@ const SingleListView = ({ lists, addListFunction, removeListFunction}: {lists: L
             : 
                     (<>
                         
-                        <form onSubmit={(e) => {
+                        <form className="form" onSubmit={(e) => {
                             postHandler(e)}}>
-                             <TextField
+                             <TextField className="input"
                                 required
                                 id="outlined-required"
                                 label="New List"
-                                name="name"
+                                name="name" 
                             />   
-                            <TextField
+                            <TextField className="input"
                                 required
                                 id="outlined-required"
                                 label="New Item List"
