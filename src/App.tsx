@@ -21,16 +21,11 @@ function App() {
   }
 
   const modifyList: UpdateListsFunction = (newList: List) => {
-    console.log('antes', newList)
-    const latsItem = newList.items[newList.items.length-1]
-    const thisList = allTheLists.find((list)=>list._id === newList._id)
-    thisList?.items.push(latsItem)
-    console.log('despues', thisList)
-
-    const newAllTheLists = allTheLists.map((list)=> list._id === newList._id 
+       const newAllTheLists = allTheLists.map((list)=> list._id === newList._id 
       ? newList 
       : list
     )
+    setAllTheLists(newAllTheLists)
   }
 
   const removeList = (listId: string) => {
@@ -48,7 +43,6 @@ function App() {
               path='/SingleListView/:id' 
               element= {
                 <SingleListView 
-                  lists={allTheLists} 
                   addListFunction={addList} 
                   removeListFunction={removeList}
                   modifyListFunction={modifyList} 
@@ -59,7 +53,6 @@ function App() {
               path='/SingleListView' 
               element= {
                 <SingleListView 
-                  lists={allTheLists} 
                   addListFunction={addList} 
                   removeListFunction={removeList} 
                   modifyListFunction={modifyList}

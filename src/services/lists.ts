@@ -25,6 +25,10 @@ export const postList = async (listname: string, items: string[] ) => {
 
 
 export const putList = async (listname?: string , items?: string[], idList?: string ) => {
+    if(idList === undefined){
+        return alert( 'id is missing')
+    } 
+
     const response = await fetch(
         'http://localhost:3001/lists',
         {
@@ -60,3 +64,10 @@ export const deleteList = async (idList: string | undefined ) => {
     const content = await response.json();
     return content;
 }
+
+export const getListById = async (idList: string) => {
+    const response = await fetch(`http://localhost:3001/lists/list/${idList}`)
+    const body = await response.json()
+    return body
+}
+
