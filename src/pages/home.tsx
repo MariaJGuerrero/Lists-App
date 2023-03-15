@@ -36,7 +36,7 @@ const Home = ( { lists }: {lists: List[]}) => {
                     )}
                 </div>
                 <Link to={`/singleListView`}>
-                    <Button  variant="contained" size= 'large' >Create New List</Button>
+                    <Button  variant="contained" color="success"  size= 'large' >Create New List</Button>
                 </Link>
             </section>
         </div>

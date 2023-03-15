@@ -50,14 +50,12 @@ App-link {
 }
 
 
-
-
-
 .form{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 40px 40px;
 }
 
 .css-1u3bzj6-MuiFormControl-root-MuiTextField-root{

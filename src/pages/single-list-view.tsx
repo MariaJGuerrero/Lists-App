@@ -92,17 +92,17 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                                 name="item"
                             />
                             <div className="buttons-container">
-                                <Button  type="submit" variant="contained" size= 'large'>
+                                <Button  type="submit" variant="contained" color="success" size= 'large'>
                                     Save
                                 </Button>
-                                <Button  type="submit" variant="contained" size= 'small' onClick={()=> deleteAList(list?._id)}>
+                                <Button  type="submit" variant="contained" color="error" size= 'small' onClick={()=> deleteAList(list?._id)}>
                                     Delete the list
                                 </Button>
                             </div>
-                            <Link to={`/`}>
-                                <Button  variant="contained" size= 'large' >Home</Button>
-                            </Link>
                         </form>
+                            <Link to={`/`}>
+                                <Button  variant="contained" color="secondary" size= 'large' >Home</Button>
+                            </Link>
                     </section>
                 </>)
                
@@ -113,7 +113,7 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                             <TextField className="input"
                             required
                             id="outlined-required"
-                            label="New List"
+                            label="New List name"
                             name="name" 
                         />   
                         <TextField className="input"
@@ -122,10 +122,13 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                             label="New Item List"
                             name="item"
                         />
-                        <Button type="submit" variant="contained" size= 'small' >
+                        <Button type="submit" variant="contained" color="success"  size= 'small' >
                             Create
                         </Button>
                     </form>
+                        <Link to={`/`}>
+                            <Button  variant="contained" color="secondary" size= 'large' >Home</Button>
+                        </Link>
                 </>)
             }
             
