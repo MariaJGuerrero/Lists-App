@@ -41,35 +41,17 @@ App-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #9E7676;
-}
-
-.title{
-  color: #FFF8EA;
-}
-
-.lists-names{
-  color: #594545;
+ 
 }
 
 .lists-names-container{
   margin: 10% 10%;
+  
 }
 
-button.css-11qr2p8-MuiButtonBase-root-MuiButton-root{
-  color: #FFF8EA;
-  background-color: #815B5B;
-}
 
-button.css-jh47zj-MuiButtonBase-root-MuiButton-root{
-  color: #FFF8EA;
-  background-color: #815B5B;
-}
 
-.button{
-  color: #FFF8EA;
-  background-color: #815B5B;
-}
+
 
 .form{
   display: flex;
@@ -91,14 +73,6 @@ button.css-jh47zj-MuiButtonBase-root-MuiButton-root{
   align-items: center;
 }
 
-.single-list-name{
-  color: #594545;
-}
-
-.items{
-  color: #9E7676;
-}
-
 li{
   list-style: none;
   display: flex;
@@ -106,6 +80,13 @@ li{
   justify-content: center;
   align-items: center;
   
+}
+
+.buttons-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 

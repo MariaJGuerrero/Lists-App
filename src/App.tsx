@@ -28,10 +28,12 @@ function App() {
     setAllTheLists(newAllTheLists)
   }
 
+  
   const removeList = (listId: string) => {
-    const allTheListsUpdate = allTheLists.filter((list)=> list._id === listId)
+    const allTheListsUpdate = allTheLists.filter((list)=> list._id !== listId)
+    console.log(allTheListsUpdate)
     setAllTheLists(allTheListsUpdate)
-    console.log('listado actualizado despues delete', allTheLists)
+   
   }
 
   return (

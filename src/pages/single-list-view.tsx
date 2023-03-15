@@ -1,5 +1,5 @@
 import { FormEvent, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { putList, postList, deleteList, getListById } from '../services/lists';
 import { List, UpdateListsFunction } from "../models/list";
 import Button from '@mui/material/Button';
@@ -16,22 +16,15 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 const SingleListView = ({ addListFunction, removeListFunction, modifyListFunction }: { addListFunction: UpdateListsFunction, removeListFunction: Function, modifyListFunction: UpdateListsFunction}) => {
     
     const { id } = useParams();
-    //let idList: string = id 
-    /*if(id === undefined){
-        return <p>id is missing</p>
-    }else{
-        idList = id
-    }*/
-   //id === undefined ? alert('id is missing') : idList = id
-
+    
     const [list, setList] = useState<List>()
     useEffect(()=> {
         if(id !== undefined){
             getListById(id).then((listById)=> {setList(listById)})
         }
-      }, [])
+      }, [id])
 
-      
+    let navigate = useNavigate();
     const postHandler = (e: FormEvent) => {
         e.preventDefault();
         const target = e.target as HTMLFormElement
@@ -40,7 +33,8 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
         const item = data.get('item') as string
         postList(listName, [item] ).then((newList)=>{
             addListFunction(newList)
-            
+            navigate(`/singleListView/${newList._id}`)
+        
         })   
     }
 
@@ -55,21 +49,16 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
         putList(listName, newItemList, list?._id).then((newList)=>{
             modifyListFunction(newList)
             setList(newList)
-        })
-        
-        
-        
-        
-        
+        }) 
     }
 
     const deleteAList = (listId: string| undefined) => {
-        deleteList(listId).then((Id)=>
-            {
-                removeListFunction(Id)
-          
+        deleteList(listId).then(()=> {
+                removeListFunction(listId)
+                navigate('/')
             })
     }
+
 
     return(
         <div className="single-view-container">
@@ -81,9 +70,7 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                         <Typography className="single-list-name" variant="h2" gutterBottom>
                             {list?.name}
                         </Typography>
-                        <Button  type="submit" variant="contained" size= 'small' onClick={()=> deleteAList(list?._id)}>
-                            Delete the list
-                        </Button>
+                        
                     </header>
                     <section>
                         <ul>
@@ -104,9 +91,17 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                                 label="New Item List"
                                 name="item"
                             />
-                            <Button  type="submit" variant="contained" size= 'small'>
-                                Save
-                            </Button>
+                            <div className="buttons-container">
+                                <Button  type="submit" variant="contained" size= 'large'>
+                                    Save
+                                </Button>
+                                <Button  type="submit" variant="contained" size= 'small' onClick={()=> deleteAList(list?._id)}>
+                                    Delete the list
+                                </Button>
+                            </div>
+                            <Link to={`/`}>
+                                <Button  variant="contained" size= 'large' >Home</Button>
+                            </Link>
                         </form>
                     </section>
                 </>)
@@ -127,7 +122,7 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                             label="New Item List"
                             name="item"
                         />
-                        <Button type="submit" variant="contained" size= 'small' style={{ textDecoration: 'none' }}>
+                        <Button type="submit" variant="contained" size= 'small' >
                             Create
                         </Button>
                     </form>
