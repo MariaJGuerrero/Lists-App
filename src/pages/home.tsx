@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import { List } from "../models/list";
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 import CreateIcon from '@mui/icons-material/Create';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -15,28 +16,30 @@ import '@fontsource/roboto/700.css';
 const Home = ( { lists }: {lists: List[]}) => {
 
     return(
-        <div>
+        <div className='home-container'>
             <header className='home-header'>
-            <Typography className= 'title' variant="h1" gutterBottom>
+            <Typography className= 'title' variant="h3" gutterBottom>
                 MY LISTS
             </Typography>
             </header>
             <section>
                 <div className='lists-names-container'>
                     {lists.map((list)=>
-                        <>
-                            <Link to={`/singleListView/${list._id}`} style={{ textDecoration: 'none' }}>
+                        <Card sx={{marginBottom: 3 }}>
+                            <CardContent sx={{display: 'flex', justifyContent: 'space-around'}}>
                                 <Typography className='lists-names' variant="body1" color="black" gutterBottom>
                                     {list.name}
                                 </Typography>
-                            </Link>
-                            <CreateIcon />
-                            <Divider variant="inset" component="li" />
-                        </>
+                                <Link to={`/singleListView/${list._id}`}>
+                                <CreateIcon />
+                                </Link>
+                               
+                            </CardContent>
+                        </Card>
                     )}
                 </div>
                 <Link to={`/singleListView`}>
-                    <Button  variant="contained" color="success"  size= 'large' >Create New List</Button>
+                    <Button  variant="contained" color="inherit"  size= 'large' >Create New List</Button>
                 </Link>
             </section>
         </div>

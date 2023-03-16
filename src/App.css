@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #ECF2FF;
 }
 
 /*.App-logo {
@@ -37,11 +38,16 @@ App-link {
   }
 }*/
 
+
+.home-container{
+  background-color: #ECF2FF;
+}
+
 .home-header{
   display: flex;
   align-items: center;
   justify-content: center;
- 
+  margin-top: 20px;
 }
 
 .lists-names-container{
@@ -58,16 +64,11 @@ App-link {
   margin: 40px 40px;
 }
 
-.css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
-  margin: 10% 10%;
-}
-
-
-.single-view-header{
+.edition-page-header{
   display: flex;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -85,6 +86,11 @@ li{
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+}
+
+.create-page-header{
+  display: flex;
+  justify-content: flex-start;
 }
 
 

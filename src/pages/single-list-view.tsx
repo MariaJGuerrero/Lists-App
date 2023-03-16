@@ -10,6 +10,9 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import HomeIcon from '@mui/icons-material/Home';
+import Divider from '@mui/material/Divider';
+import Checkbox from '@mui/material/Checkbox';
 
 
 
@@ -66,21 +69,30 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
             {id 
             ? 
                 (<>
-                    <header className="single-view-header">
-                        <Typography className="single-list-name" variant="h2" gutterBottom>
-                            {list?.name}
-                        </Typography>
+                    <header className="edition-page-header">
+                        <Link to={`/`}>
+                            <Button sx={{margin: 2 }}  variant="contained" color="secondary" size= 'large' ><HomeIcon /></Button>
+                        </Link>
                         
                     </header>
                     <section>
+                        <Typography className="single-list-name" variant="h2" gutterBottom>
+                            {list?.name}
+                        </Typography>
                         <ul>
                             {list?.items.map((item)=> 
-                            <li>
-                                <Typography className="items" variant="body1" gutterBottom>
-                                    {item}
-                                </Typography>
-                                <DeleteTwoToneIcon />
-                            </li>
+                            <>
+                                <li style= {{marginBottom: 5, justifyContent: 'space-around'}}>
+                                    <Checkbox
+                                        
+                                    />
+                                    <Typography className="items" variant="body1" gutterBottom>
+                                        {item}
+                                    </Typography>
+                                    <DeleteTwoToneIcon />
+                                </li>
+                                <Divider />
+                            </>
                             )}
                         </ul>
                         <form className="form" onSubmit={(e) => {
@@ -92,7 +104,7 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                                 name="item"
                             />
                             <div className="buttons-container">
-                                <Button  type="submit" variant="contained" color="success" size= 'large'>
+                                <Button sx={{margin: 2 }}  type="submit" variant="contained" color="primary" size= 'large'>
                                     Save
                                 </Button>
                                 <Button  type="submit" variant="contained" color="error" size= 'small' onClick={()=> deleteAList(list?._id)}>
@@ -100,35 +112,37 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                                 </Button>
                             </div>
                         </form>
-                            <Link to={`/`}>
-                                <Button  variant="contained" color="secondary" size= 'large' >Home</Button>
-                            </Link>
+                           
                     </section>
                 </>)
                
             : 
                 (<>
+                    <header className="create-page-header">
+                        <Link to={`/`}>
+                            <Button sx={{margin: 2 }} variant="contained" color="secondary" size= 'small' ><HomeIcon /></Button>
+                        </Link>
+                    </header>
+                    
                     <form className="form" onSubmit={(e) => {
                         postHandler(e)}}>
-                            <TextField className="input"
+                            <TextField
+                            sx={{margin: 2 }}
                             required
                             id="outlined-required"
                             label="New List name"
                             name="name" 
                         />   
-                        <TextField className="input"
+                        <TextField 
                             required
                             id="outlined-required"
                             label="New Item List"
                             name="item"
                         />
-                        <Button type="submit" variant="contained" color="success"  size= 'small' >
+                        <Button sx={{margin: 2 }} type="submit" variant="contained" color="primary"  size= 'small' >
                             Create
                         </Button>
                     </form>
-                        <Link to={`/`}>
-                            <Button  variant="contained" color="secondary" size= 'large' >Home</Button>
-                        </Link>
                 </>)
             }
             
