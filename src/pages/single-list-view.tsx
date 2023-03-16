@@ -76,7 +76,7 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                         
                     </header>
                     <section>
-                        <Typography className="single-list-name" variant="h2" gutterBottom>
+                        <Typography variant="h2" gutterBottom>
                             {list?.name}
                         </Typography>
                         <ul>
@@ -123,26 +123,31 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                             <Button sx={{margin: 2 }} variant="contained" color="secondary" size= 'small' ><HomeIcon /></Button>
                         </Link>
                     </header>
-                    
-                    <form className="form" onSubmit={(e) => {
-                        postHandler(e)}}>
-                            <TextField
-                            sx={{margin: 2 }}
-                            required
-                            id="outlined-required"
-                            label="New List name"
-                            name="name" 
-                        />   
-                        <TextField 
-                            required
-                            id="outlined-required"
-                            label="New Item List"
-                            name="item"
-                        />
-                        <Button sx={{margin: 2 }} type="submit" variant="contained" color="primary"  size= 'small' >
-                            Create
-                        </Button>
-                    </form>
+                    <section>
+                        <Typography  variant="h4" gutterBottom>
+                            Create a New List!
+                        </Typography>
+                        <form className="form" onSubmit={(e) => {
+                            postHandler(e)}}>
+                                <TextField
+                                sx={{margin: 2 }}
+                                required
+                                id="outlined-required"
+                                label="New List name"
+                                name="name" 
+                            />   
+                            <TextField 
+                                required
+                                id="outlined-required"
+                                label="New Item List"
+                                name="item"
+                            />
+                            <Button sx={{margin: 2 }} type="submit" variant="contained" color="primary"  size= 'small' >
+                                Create
+                            </Button>
+                        </form>
+                    </section>
+                   
                 </>)
             }
             
