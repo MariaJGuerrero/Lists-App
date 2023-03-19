@@ -1,4 +1,6 @@
-export const getLists = async () => {
+import { NavigateFunction } from "react-router-dom"
+
+export const getLists = async ( ) => {
     const token = localStorage.getItem('token')
     const response = await fetch('http://localhost:3001/lists', 
     {
@@ -7,6 +9,9 @@ export const getLists = async () => {
         }
     }
     )
+    if(response.status === 401){
+        throw Error('unauthoraized')
+    }
     const body = await response.json()
     return body
 }

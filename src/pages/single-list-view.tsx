@@ -1,7 +1,7 @@
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useContext } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { putList, postList, deleteList, getListById } from '../services/lists';
-import { List, UpdateListsFunction } from "../models/list";
+import { List } from "../models/list";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -13,10 +13,13 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import HomeIcon from '@mui/icons-material/Home';
 import Divider from '@mui/material/Divider';
 import Checkbox from '@mui/material/Checkbox';
+import { appContext } from "../context/app-context";
 
 
 
-const SingleListView = ({ addListFunction, removeListFunction, modifyListFunction }: { addListFunction: UpdateListsFunction, removeListFunction: Function, modifyListFunction: UpdateListsFunction}) => {
+const SingleListView = () => {
+
+    const context = useContext(appContext)
     
     const { id } = useParams();
     
@@ -35,7 +38,7 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
         const listName = data.get('name') as string
         const item = data.get('item') as string
         postList(listName, [item] ).then((newList)=>{
-            addListFunction(newList)
+            context.addList(newList)
             navigate(`/singleListView/${newList._id}`)
         
         })   
@@ -50,14 +53,14 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
         const items: string[] = list?.items ?? []
         const newItemList = [...items, item]
         putList(listName, newItemList, list?._id).then((newList)=>{
-            modifyListFunction(newList)
+            context.modifyList(newList)
             setList(newList)
         }) 
     }
 
     const deleteAList = (listId: string| undefined) => {
         deleteList(listId).then(()=> {
-                removeListFunction(listId)
+                context.removeList(listId)
                 navigate('/')
             })
     }

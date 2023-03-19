@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import './App.css';
+import { appContext } from "./context/app-context";
 import { List, UpdateListsFunction } from "./models/list";
 import Home from './pages/home';
 import LoginPage from "./pages/login";
@@ -11,9 +12,7 @@ import { getLists } from "./services/lists";
 function App() {
 
   const [allTheLists, setAllTheLists] = useState<List[]>([])
-  useEffect(()=> {
-    getLists().then((r)=> {setAllTheLists(r)})
-  }, [])
+  
 
   const addList:UpdateListsFunction = (newList: List) => {
     const listAdded = [...allTheLists, newList]
@@ -39,30 +38,20 @@ function App() {
   return (
     <div className="App">
         <Router>
+          <appContext.Provider value={{lists: allTheLists, addList, modifyList, removeList, setLists: setAllTheLists}}>
           <Routes>
-            <Route path='/' element= {<Home lists={allTheLists}/>} />
+            <Route path='/' element= {<Home />} />
             <Route path='/login' element= {<LoginPage />} />
             <Route 
               path='/SingleListView/:id' 
-              element= {
-                <SingleListView 
-                  addListFunction={addList} 
-                  removeListFunction={removeList}
-                  modifyListFunction={modifyList} 
-                />
-              } 
+              element= {<SingleListView />} 
             />
             <Route 
               path='/SingleListView' 
-              element= {
-                <SingleListView 
-                  addListFunction={addList} 
-                  removeListFunction={removeList} 
-                  modifyListFunction={modifyList}
-                />
-              } 
+              element= {<SingleListView />} 
             />
           </Routes>
+          </appContext.Provider>
         </Router>
     </div>
   );

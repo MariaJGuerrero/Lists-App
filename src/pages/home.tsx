@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { List } from "../models/list";
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 import Card from '@mui/material/Card';
@@ -9,11 +8,21 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { useContext, useEffect } from 'react';
+import { appContext } from '../context/app-context';
+import { getLists } from '../services/lists';
 
 
 
 
-const Home = ( { lists }: {lists: List[]}) => {
+const Home = () => {
+
+const context = useContext(appContext)
+
+let navigate = useNavigate()
+  useEffect(()=> {
+    getLists().then((r)=> {context.setLists(r)}).catch(()=> {navigate('/login')})
+  }, [])
 
     return(
         <div className='home-container'>
@@ -24,7 +33,7 @@ const Home = ( { lists }: {lists: List[]}) => {
             </header>
             <section>
                 <div className='lists-names-container'>
-                    {lists.map((list)=>
+                    {context.lists.map((list)=>
                         <Card sx={{marginBottom: 3 }}>
                             <CardContent sx={{display: 'flex', justifyContent: 'space-around'}}>
                                 <Typography className='lists-names' variant="body1" color="black" gutterBottom>

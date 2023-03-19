@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { useNavigate } from "react-router-dom"
 import Button from '@mui/material/Button';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -18,24 +19,6 @@ import { login } from '../services/login';
   
 
 
-const postLogin = (e: FormEvent) => {
-    e.preventDefault();
-    const target = e.target as HTMLFormElement
-    const data = new FormData(target);
-    const userName = data.get('user') as string
-    const password = data.get('password') as string
-    login(userName, password ).then((response)=>{
-        const token = response.token
-        if(!token){
-            alert('ERROR: user or password not valid')
-            return
-        }
-        localStorage.setItem('token', token)
-        console.log('Respuesta del login', response)
-    }).catch(() => {
-        console.log('error')
-    })  
-}
 
 
 const LoginPage = () => {
@@ -44,6 +27,25 @@ const LoginPage = () => {
     
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+
+    let navigate = useNavigate();
+    const postLogin = (e: FormEvent) => {
+        e.preventDefault();
+        const target = e.target as HTMLFormElement
+        const data = new FormData(target);
+        const userName = data.get('user') as string
+        const password = data.get('password') as string
+        login(userName, password ).then((response)=>{
+            const token = response.token
+            if(!token){
+                alert('ERROR: user or password not valid')
+                return
+            }
+            localStorage.setItem('token', token)
+           navigate('/')
+    
+        })
+    }
 
 
     return(
