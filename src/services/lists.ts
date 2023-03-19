@@ -1,10 +1,18 @@
 export const getLists = async () => {
-    const response = await fetch('http://localhost:3001/lists')
+    const token = localStorage.getItem('token')
+    const response = await fetch('http://localhost:3001/lists', 
+    {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    )
     const body = await response.json()
     return body
 }
 
 export const postList = async (listname: string, items: string[] ) => {
+    const token = localStorage.getItem('token')
     const response = await fetch(
         'http://localhost:3001/lists',
         {
@@ -14,7 +22,8 @@ export const postList = async (listname: string, items: string[] ) => {
                 items: items
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
             },
         }
     )
@@ -25,6 +34,7 @@ export const postList = async (listname: string, items: string[] ) => {
 
 
 export const putList = async (listname?: string , items?: string[], idList?: string ) => {
+    const token = localStorage.getItem('token')
     if(idList === undefined){
         return alert( 'id is missing')
     } 
@@ -39,7 +49,8 @@ export const putList = async (listname?: string , items?: string[], idList?: str
                 id: idList
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
             },
         }
     )
@@ -49,6 +60,7 @@ export const putList = async (listname?: string , items?: string[], idList?: str
 
 
 export const deleteList = async (idList: string | undefined ) => {
+    const token = localStorage.getItem('token')
     const response = await fetch(
         'http://localhost:3001/lists',
         {
@@ -57,7 +69,8 @@ export const deleteList = async (idList: string | undefined ) => {
                 id: idList
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
             },
         }
     )
@@ -66,7 +79,14 @@ export const deleteList = async (idList: string | undefined ) => {
 }
 
 export const getListById = async (idList: string) => {
-    const response = await fetch(`http://localhost:3001/lists/list/${idList}`)
+    const token = localStorage.getItem('token')
+    const response = await fetch(`http://localhost:3001/lists/list/${idList}`,
+    {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    )
     const body = await response.json()
     return body
 }
