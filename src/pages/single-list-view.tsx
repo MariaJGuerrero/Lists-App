@@ -95,8 +95,7 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                             </>
                             )}
                         </ul>
-                        <form className="form" onSubmit={(e) => {
-                                putHandler(e)}}>
+                        <form className="form" onSubmit={(e) => {putHandler(e)}}>
                             <TextField 
                                 required
                                 id="outlined-required"
@@ -105,14 +104,13 @@ const SingleListView = ({ addListFunction, removeListFunction, modifyListFunctio
                             />
                             <div className="buttons-container">
                                 <Button sx={{margin: 2 }}  type="submit" variant="contained" color="primary" size= 'large'>
-                                    Save
-                                </Button>
-                                <Button  type="submit" variant="contained" color="error" size= 'small' onClick={()=> deleteAList(list?._id)}>
-                                    Delete the list
+                                    Add item
                                 </Button>
                             </div>
                         </form>
-                           
+                        <Button variant="contained" color="error" size= 'small' onClick={()=> deleteAList(list?._id)}>
+                            Delete the list
+                        </Button>
                     </section>
                 </>)
                

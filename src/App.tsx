@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import { List, UpdateListsFunction } from "./models/list";
 import Home from './pages/home';
+import LoginPage from "./pages/login";
 import SingleListView from "./pages/single-list-view";
 import { getLists } from "./services/lists";
 
@@ -17,7 +18,6 @@ function App() {
   const addList:UpdateListsFunction = (newList: List) => {
     const listAdded = [...allTheLists, newList]
     setAllTheLists(listAdded)
-    console.log('lista añadida a allthelists', listAdded)
   }
 
   const modifyList: UpdateListsFunction = (newList: List) => {
@@ -41,6 +41,7 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element= {<Home lists={allTheLists}/>} />
+            <Route path='/login' element= {<LoginPage />} />
             <Route 
               path='/SingleListView/:id' 
               element= {
