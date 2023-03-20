@@ -64,6 +64,10 @@ const SingleListView = () => {
     }
 
     const deleteAList = (listId: string| undefined) => {
+        const confirmation = confirm('are you sure?')
+        if(!confirmation){
+            return
+        }
         deleteList(listId).then(()=> {
                 context.removeList(listId)
                 navigate('/')
