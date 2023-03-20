@@ -36,7 +36,7 @@ let navigate = useNavigate()
                     {context.lists.map((list)=>
                         <Card sx={{marginBottom: 3 }}>
                             <CardContent sx={{display: 'flex', justifyContent: 'space-around'}}>
-                                <Typography className='lists-names' variant="body1" color="black" gutterBottom>
+                                <Typography variant="body1" color="black" gutterBottom>
                                     {list.name}
                                 </Typography>
                                 <Link to={`/singleListView/${list._id}`}>

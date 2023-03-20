@@ -38,8 +38,13 @@ const SingleListView = () => {
         const listName = data.get('name') as string
         const item = data.get('item') as string
         postList(listName, [item] ).then((newList)=>{
-            context.addList(newList)
-            navigate(`/singleListView/${newList._id}`)
+            const listExist = context.lists.find((list)=> listName === list.name)
+            if(listExist){
+                alert('this list already exists, please change the name') 
+                return
+            } 
+                context.addList(newList)
+                navigate(`/singleListView/${newList._id}`)
         
         })   
     }

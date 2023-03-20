@@ -38,7 +38,14 @@ function App() {
   return (
     <div className="App">
         <Router>
-          <appContext.Provider value={{lists: allTheLists, addList, modifyList, removeList, setLists: setAllTheLists}}>
+          <appContext.Provider 
+            value={{
+              lists: allTheLists, 
+              addList, 
+              modifyList, 
+              removeList, 
+              setLists: setAllTheLists
+            }}>
           <Routes>
             <Route path='/' element= {<Home />} />
             <Route path='/login' element= {<LoginPage />} />
