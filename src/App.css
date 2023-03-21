@@ -60,7 +60,14 @@ App-link {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.buttons-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
   margin: 40px 40px;
 }
 

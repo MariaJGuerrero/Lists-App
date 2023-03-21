@@ -13,6 +13,7 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import HomeIcon from '@mui/icons-material/Home';
 import Divider from '@mui/material/Divider';
 import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
 import { appContext } from "../context/app-context";
 
 
@@ -32,7 +33,7 @@ const SingleListView = () => {
 
 
     let navigate = useNavigate();
-    const postHandler = (e: FormEvent) => {
+    const createList = (e: FormEvent) => {
         e.preventDefault();
         const target = e.target as HTMLFormElement
         const data = new FormData(target);
@@ -50,7 +51,7 @@ const SingleListView = () => {
         })   
     }
 
-    const putHandler = (e: FormEvent) => {
+    const addItem = (e: FormEvent) => {
         e.preventDefault();
         const target = e.target as HTMLFormElement
         const data = new FormData(target);
@@ -75,6 +76,15 @@ const SingleListView = () => {
             })
     }
 
+    const deleteAItem = (selectIndex: number) => {
+        const remainingItems = list?.items.filter((item, index)=> index !== selectIndex)
+        console.log('lista de items despues de borrar un item',remainingItems)
+        putList(list?.name, remainingItems, list?._id).then((newList)=>{
+            context.modifyList(newList)
+            setList(newList)
+        }) 
+    }
+
 
     return(
         <div className="single-view-container">
@@ -93,7 +103,7 @@ const SingleListView = () => {
                             {list?.name}
                         </Typography>
                         <ul>
-                            {list?.items.map((item)=> 
+                            {list?.items.map((item, index)=> 
                             <>
                                 <li style= {{marginBottom: 5, justifyContent: 'space-around'}}>
                                     <Checkbox
@@ -102,13 +112,15 @@ const SingleListView = () => {
                                     <Typography className="items" variant="body1" gutterBottom>
                                         {item}
                                     </Typography>
-                                    <DeleteTwoToneIcon />
+                                    <IconButton onClick={()=>deleteAItem(index)}>
+                                        <DeleteTwoToneIcon />
+                                    </IconButton>
                                 </li>
                                 <Divider />
                             </>
                             )}
                         </ul>
-                        <form className="form" onSubmit={(e) => {putHandler(e)}}>
+                        <form className="form" onSubmit={(e) => {addItem(e)}}>
                             <TextField 
                                 required
                                 id="outlined-required"
@@ -116,15 +128,20 @@ const SingleListView = () => {
                                 name="item"
                                 
                             />
-                            <div className="buttons-container">
+                            <div>
                                 <Button sx={{margin: 2 }}  type="submit" variant="contained" color="primary" size= 'large'>
                                     Add item
                                 </Button>
                             </div>
                         </form>
-                        <Button variant="contained" color="error" size= 'small' onClick={()=> deleteAList(list?._id)}>
-                            Delete the list
-                        </Button>
+                        <div className="buttons-container">
+                            <Button variant="contained" color="success" size= 'small' >
+                                Save
+                            </Button>
+                            <Button variant="contained" color="error" size= 'small' onClick={()=> deleteAList(list?._id)}>
+                                Delete the list
+                            </Button>
+                        </div>
                     </section>
                 </>)
                
@@ -140,7 +157,7 @@ const SingleListView = () => {
                             Create a New List!
                         </Typography>
                         <form className="form" onSubmit={(e) => {
-                            postHandler(e)}}>
+                            createList(e)}}>
                                 <TextField
                                 sx={{margin: 2 }}
                                 required
