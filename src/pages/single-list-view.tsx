@@ -28,7 +28,8 @@ const SingleListView = () => {
         if(id !== undefined){
             getListById(id).then((listById)=> {setList(listById)})
         }
-      }, [id])
+      }, [id, context])
+
 
     let navigate = useNavigate();
     const postHandler = (e: FormEvent) => {
@@ -40,7 +41,7 @@ const SingleListView = () => {
         postList(listName, [item] ).then((newList)=>{
             const listExist = context.lists.find((list)=> listName === list.name)
             if(listExist){
-                alert('this list already exists, please change the name') 
+                alert('This list already exists, please change the name') 
                 return
             } 
                 context.addList(newList)
@@ -64,10 +65,10 @@ const SingleListView = () => {
     }
 
     const deleteAList = (listId: string| undefined) => {
-        const confirmation = confirm('are you sure?')
+        /*const confirmation = confirm('are you sure? You will not be able to recover the deleted data ')
         if(!confirmation){
             return
-        }
+        }*/
         deleteList(listId).then(()=> {
                 context.removeList(listId)
                 navigate('/')
@@ -113,6 +114,7 @@ const SingleListView = () => {
                                 id="outlined-required"
                                 label="New Item List"
                                 name="item"
+                                
                             />
                             <div className="buttons-container">
                                 <Button sx={{margin: 2 }}  type="submit" variant="contained" color="primary" size= 'large'>

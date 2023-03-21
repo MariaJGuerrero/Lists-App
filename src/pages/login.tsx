@@ -63,9 +63,11 @@ const LoginPage = () => {
                         id="outlined-required"
                         label="User Name"
                         name="user" 
+                        type= 'text'
                     />   
                     <TextField 
                         required
+                        type='password'
                         id="outlined-required"
                         label="Pasword"
                         name="password"
