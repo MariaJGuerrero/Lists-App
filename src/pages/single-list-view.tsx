@@ -77,9 +77,9 @@ const SingleListView = () => {
     }
 
     const deleteAItem = (selectIndex: number) => {
-        const remainingItems = list?.items.filter((item, index)=> index !== selectIndex)
-        console.log('lista de items despues de borrar un item',remainingItems)
-        putList(list?.name, remainingItems, list?._id).then((newList)=>{
+        const remainedItems = list?.items.filter((item, index)=> index !== selectIndex)
+        console.log('lista de items despues de borrar un item',remainedItems)
+        putList(list?.name, remainedItems, list?._id).then((newList)=>{
             context.modifyList(newList)
             setList(newList)
         }) 
@@ -135,10 +135,20 @@ const SingleListView = () => {
                             </div>
                         </form>
                         <div className="buttons-container">
-                            <Button variant="contained" color="success" size= 'small' >
+                            <Button 
+                                variant="contained" 
+                                color="success" 
+                                size= 'small' 
+                                //onClick={()=> context.modifyList()}
+                            >
                                 Save
                             </Button>
-                            <Button variant="contained" color="error" size= 'small' onClick={()=> deleteAList(list?._id)}>
+                            <Button 
+                                variant="contained" 
+                                color="error" 
+                                size= 'small' 
+                                onClick={()=> deleteAList(list?._id)}
+                            >
                                 Delete the list
                             </Button>
                         </div>
