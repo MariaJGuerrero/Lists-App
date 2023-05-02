@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Shopping-list App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Getting Started with Create React App
+
+##Tecnologies
+
+- React
+- Css
+- Typescript
+
+
 
 ## Available Scripts
 
