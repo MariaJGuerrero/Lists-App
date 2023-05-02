@@ -2,7 +2,7 @@
 
 Getting Started with Create React App
 
-##Tecnologies
+## Tecnologies
 
 - React
 - Css
