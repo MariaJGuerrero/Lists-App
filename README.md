@@ -5,7 +5,7 @@ Getting Started with Create React App
 ## Tecnologies
 
 - React
-- Css
+- Material UI
 - Typescript
 
 
