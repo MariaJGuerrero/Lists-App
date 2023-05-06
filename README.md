@@ -7,6 +7,8 @@ Getting Started with Create React App
 - React
 - Material UI
 - Typescript
+- API REST
+- Auth Token
 
 
 
